@@ -1,9 +1,24 @@
 import React from 'react'
 
+import styles from './BuildControls.module.css'
+
+import BuildControl from './BuildControl/BuildControl'
+
+const controls = [
+	{label: "Bacon", type: "bacon"},
+	{label: "Cheese", type: "cheese"},
+	{label: "Salad", type: "salad"},
+	{label: "Meat", type: "meat"}
+]
+
 const buildControls = (props) => {
-	<div>
-		
-	</div>
+	return (
+		<div className={styles.BuildControls}>
+			{controls.map(ctrl => {
+				return <BuildControl key={ctrl.label} label={ctrl.label} />
+			})}
+		</div>
+	)
 }
 
 export default buildControls
