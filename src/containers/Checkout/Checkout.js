@@ -14,6 +14,15 @@ class Checkout extends Component {
 		confirmPurchase: null
 	}
 
+	componentDidMount () {
+		const query = new URLSearchParams(this.props.location.search)
+		const ingredients = {}
+		for (let param of query.entries()) {
+			ingredients[param[0]] = +param[1]
+		}
+		this.setState({ingredients: ingredients})
+	}
+
 	checkoutCancelHandler = () => {
 		this.setState({confirmPurchase: false})
 		this.props.history.goBack()
