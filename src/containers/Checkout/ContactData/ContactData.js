@@ -6,7 +6,6 @@ import styles from './ContactData.module.css'
 import Button from '../../../components/UI/Button/Button'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/Forms/Input/Input'
-import { readFileSync } from 'fs'
 
 class ContactData extends Component {
 	state = {
@@ -174,7 +173,9 @@ class ContactData extends Component {
 						elementConfig={formElement.config.elementConfig}
 						value={formElement.config.value}
 						key={formElement.id}
-						change={(event) => this.inputChangeHandler(event, formElement.id)}/>
+						change={(event) => this.inputChangeHandler(event, formElement.id)}
+						invalid={!formElement.config.valid}
+						shouldValidate={formElement.config.validation}/>
 				))}
 				<Button btnType="Success">ORDER</Button>
 			</form>
