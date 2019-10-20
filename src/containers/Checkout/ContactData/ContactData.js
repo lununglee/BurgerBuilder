@@ -6,6 +6,7 @@ import styles from './ContactData.module.css'
 import Button from '../../../components/UI/Button/Button'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/Forms/Input/Input'
+import { readFileSync } from 'fs'
 
 class ContactData extends Component {
 	state = {
@@ -16,7 +17,11 @@ class ContactData extends Component {
 					type: 'text',
 					placeholder: 'Your first name'
 				},
-				value: ''
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false
 			},
 			lastName: {
 				elementType: 'input',
@@ -24,7 +29,11 @@ class ContactData extends Component {
 					type: 'text',
 					placeholder: 'Your last name'
 				},
-				value: ''
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false
 			},
 			street: {
 				elementType: 'input',
@@ -32,7 +41,11 @@ class ContactData extends Component {
 					type: 'text',
 					placeholder: 'Street'
 				},
-				value: ''
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false
 			},
 			city: {
 				elementType: 'input',
@@ -40,7 +53,11 @@ class ContactData extends Component {
 					type: 'text',
 					placeholder: 'City'
 				},
-				value: ''
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false
 			},
 			postal: {
 				elementType: 'input',
@@ -48,7 +65,13 @@ class ContactData extends Component {
 					type: 'text',
 					placeholder: 'Postal Code'
 				},
-				value: ''
+				value: '',
+				validation: {
+					required: true,
+					minLength: 5,
+					maxLength: 5
+				},
+				valid: false
 			},
 			country: {
 				elementType: 'input',
@@ -56,7 +79,11 @@ class ContactData extends Component {
 					type: 'text',
 					placeholder: 'Country'
 				},
-				value: ''
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false
 			},
 			email: {
 				elementType: 'input',
@@ -64,7 +91,11 @@ class ContactData extends Component {
 					type: 'email',
 					placeholder: 'Your email'
 				},
-				value: ''
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false
 			},
 			deliverMethod: {
 				elementType: 'select',
@@ -74,7 +105,11 @@ class ContactData extends Component {
 						{value: 'cheapest', displayValue: 'Cheapest'}
 					]
 				},
-				value: ''
+				value: '',
+				validation: {
+					required: true
+				},
+				valid: false
 			}
 		},
 		loading: false,
@@ -104,8 +139,23 @@ class ContactData extends Component {
 		const updatedOrderForm = {...this.state.orderForm}
 		const updatedFormElement = {...updatedOrderForm[inputIdentifier]}
 		updatedFormElement.value = event.target.value
+		updatedFormElement.valid = this.checkValidation(updatedFormElement.value, updatedFormElement.validation)
 		updatedOrderForm[inputIdentifier] = updatedFormElement
 		this.setState({orderForm: updatedOrderForm})
+	}
+
+	checkValidation = (value, rules) => {
+		let isValid = false
+		if (rules.required) {
+			isValid = value.trim() !== ''
+		}
+		if (rules.minLength) {
+			isValid = value.length >= rules.minLength
+		}
+		if (rules.maxLength) {
+			isValid = value.length <= rules.maxLength
+		}
+		return isValid
 	}
 
 	render () {
