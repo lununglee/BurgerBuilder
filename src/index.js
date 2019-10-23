@@ -1,17 +1,20 @@
+// REDUX PACKAGE
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// ROUTING PACKAGE
 import { BrowserRouter } from 'react-router-dom'
 
+// REDUX PACKAGE
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import ingrdntReducer from './store/reducers/ingrdntReducer'
+import ingredientReducer from './store/reducers/ingredientReducer'
 
 const rootReducer = combineReducers({
-	ingredient: ingrdntReducer
+	ing: ingredientReducer
 })
 
 const store = createStore(rootReducer)
