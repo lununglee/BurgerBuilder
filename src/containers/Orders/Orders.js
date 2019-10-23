@@ -13,7 +13,6 @@ class Orders extends Component {
 		Axios.get('/orders.json')
 			.then(response => {
 				const fetchOrders = []
-				console.log(response.data)
 				for (let key in response.data) {
 					fetchOrders.push({
 						...response.data[key],
