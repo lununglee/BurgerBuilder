@@ -1,8 +1,16 @@
+// REACT PACKAGES
 import React, { Component } from 'react'
+
+// AXIOS PACKAGES
 import Axios from '../../../axios'
 
+// REDUX PACKAGES
+import { connect } from 'react-redux'
+
+// CSS STYLING
 import styles from './ContactData.module.css'
 
+// LOCAL IMPORTS
 import Button from '../../../components/UI/Button/Button'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/Forms/Input/Input'
@@ -128,8 +136,8 @@ class ContactData extends Component {
 			formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value
 		}
 		const order = {
-			ingredients: this.props.ingredients,
-			price: this.props.price,
+			ingredients: this.props._ingredients,
+			price: this.props._price,
 			orderData: formData
 		}
 		Axios.post('/orders.json', order)
@@ -204,4 +212,10 @@ class ContactData extends Component {
 	}
 }
 
-export default ContactData
+const mapStateToProps = (state) => {
+	return {
+		_ingredients: state.ing.ingredients
+	}
+}
+
+export default connect(mapStateToProps)(ContactData)

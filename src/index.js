@@ -1,14 +1,14 @@
-// REDUX PACKAGE
+// REDUX PACKAGES
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// ROUTING PACKAGE
+// ROUTING PACKAGES
 import { BrowserRouter } from 'react-router-dom'
 
-// REDUX PACKAGE
+// REDUX PACKAGES
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import ingredientReducer from './store/reducers/ingredientReducer'
