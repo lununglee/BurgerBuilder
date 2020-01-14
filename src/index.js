@@ -15,6 +15,10 @@ import logger from 'redux-logger'
 import { Provider } from 'react-redux'
 import ingredientReducer from './store/reducers/ingredientReducer'
 
+// SENTRY.IO
+import * as Sentry from '@sentry/browser'
+import ErrorBoundary from '../src/hoc/withErrorHandler/ErrorBoundary'
+
 const rootReducer = combineReducers({
 	ing: ingredientReducer
 })
@@ -26,10 +30,17 @@ const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, 
 const app = (
 	<Provider store={store}>
 		<BrowserRouter>
-			<App />
+			<ErrorBoundary>
+				<App />
+			</ErrorBoundary>
 		</BrowserRouter>
 	</Provider>
 )
+
+Sentry.init({ dsn: 'https://178500217b2442ff8755d3fccbbcdc2c@sentry.42.us.org/13',
+	maxBreadcrumbs: 50,
+	debug: true, 
+});
 
 ReactDOM.render( app, document.getElementById('root'));
 

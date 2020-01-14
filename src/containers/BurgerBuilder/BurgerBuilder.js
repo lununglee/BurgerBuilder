@@ -11,6 +11,8 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import * as actionTypes from '../../store/actions'
 
+import * as Sentry from '@sentry/browser'
+
 class BurgerBuilder extends Component {
 	state = {
 		purchasable: false,
@@ -53,6 +55,7 @@ class BurgerBuilder extends Component {
 	}
 
 	render () {
+		Sentry.captureException(new Error("Something broke"));
 		const disabledInfo = {
 			...this.props._ingredients
 		}

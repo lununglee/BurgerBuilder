@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@sentry/browser": "^5.11.0",
+    "@sentry/node": "^5.11.0",
     "axios": "^0.19.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
