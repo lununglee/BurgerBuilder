@@ -11,6 +11,7 @@ import { BrowserRouter } from 'react-router-dom'
 // REDUX PACKAGES
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 import { Provider } from 'react-redux'
 import ingredientReducer from './store/reducers/ingredientReducer'
 
@@ -18,9 +19,9 @@ const rootReducer = combineReducers({
 	ing: ingredientReducer
 })
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, thunk)))
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, thunk)))
 
 const app = (
 	<Provider store={store}>
